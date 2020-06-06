@@ -56,15 +56,15 @@ compile:
 	$(HOME)/go/bin/gopherjs build -m -o build/webapp.js web_client/*.go
 
 installkali:
-	#apt-get -y install git screen hostapd autossh bluez bluez-tools bridge-utils policykit-1 genisoimage iodine haveged
-	#apt-get -y install tcpdump
-	#apt-get -y install python-pip python-dev
+	apt-get -y install git screen hostapd autossh bluez bluez-tools bridge-utils policykit-1 genisoimage iodine haveged
+	apt-get -y install tcpdump
+	apt-get -y install python-pip python-dev
 
 	# before installing dnsmasq, the nameserver from /etc/resolv.conf should be saved
 	# to restore after install (gets overwritten by dnsmasq package)
-	#cp /etc/resolv.conf /tmp/backup_resolv.conf
-	#apt-get -y install dnsmasq
-	#/bin/bash -c 'cat /tmp/backup_resolv.conf > /etc/resolv.conf'
+	cp /etc/resolv.conf /tmp/backup_resolv.conf
+	apt-get -y install dnsmasq
+	/bin/bash -c 'cat /tmp/backup_resolv.conf > /etc/resolv.conf'
 
 	# python dependencies for HIDbackdoor
 	sudo pip install pydispatcher
@@ -86,8 +86,8 @@ installkali:
 	cp build/webapp.js.map /usr/local/P4wnP1/www
 
 	# careful testing
-	#sudo update-rc.d dhcpcd disable
-	#sudo update-rc.d dnsmasq disable
+	sudo update-rc.d dhcpcd disable
+	sudo update-rc.d dnsmasq disable
 	systemctl disable networking.service # disable network service, relevant parts are wrapped by P4wnP1 (boottime below 20 seconds)
 
 	# enable service
@@ -111,8 +111,8 @@ install:
 	cp build/webapp.js.map /usr/local/P4wnP1/www
 
 	# careful testing
-	#sudo update-rc.d dhcpcd disable
-	#sudo update-rc.d dnsmasq disable
+	sudo update-rc.d dhcpcd disable
+	sudo update-rc.d dnsmasq disable
 	systemctl disable networking.service # disable network service, relevant parts are wrapped by P4wnP1 (boottime below 20 seconds)
 
 	# reinit service daemon
@@ -135,5 +135,5 @@ remove:
 	# reinit service daemon
 	systemctl daemon-reload
 
-	#sudo update-rc.d dhcpcd enable
+	sudo update-rc.d dhcpcd enable
 
