@@ -62,9 +62,9 @@ installkali:
 
 	# before installing dnsmasq, the nameserver from /etc/resolv.conf should be saved
 	# to restore after install (gets overwritten by dnsmasq package)
-	#cp /etc/resolv.conf /tmp/backup_resolv.conf
-	#apt-get -y install dnsmasq
-	#/bin/bash -c 'cat /tmp/backup_resolv.conf > /etc/resolv.conf'
+	cp /etc/resolv.conf /tmp/backup_resolv.conf
+	apt-get -y install dnsmasq
+	/bin/bash -c 'cat /tmp/backup_resolv.conf > /etc/resolv.conf'
 
 	# python dependencies for HIDbackdoor
 	sudo pip install pydispatcher
@@ -86,8 +86,8 @@ installkali:
 	cp build/webapp.js.map /usr/local/P4wnP1/www
 
 	# careful testing
-	#sudo update-rc.d dhcpcd disable
-	#sudo update-rc.d dnsmasq disable
+	sudo update-rc.d dhcpcd disable
+	sudo update-rc.d dnsmasq disable
 	systemctl disable networking.service # disable network service, relevant parts are wrapped by P4wnP1 (boottime below 20 seconds)
 
 	# enable service
@@ -111,8 +111,8 @@ install:
 	cp build/webapp.js.map /usr/local/P4wnP1/www
 
 	# careful testing
-	#sudo update-rc.d dhcpcd disable
-	#sudo update-rc.d dnsmasq disable
+	sudo update-rc.d dhcpcd disable
+	sudo update-rc.d dnsmasq disable
 	systemctl disable networking.service # disable network service, relevant parts are wrapped by P4wnP1 (boottime below 20 seconds)
 
 	# reinit service daemon
